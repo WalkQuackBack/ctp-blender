@@ -1,11 +1,12 @@
 import { X2jOptions, XmlBuilderOptions } from "fast-xml-parser";
+import { parseHex } from "culori";
 
 export function recursive_iterator(
   obj: NestedRecord,
   callback: (key: string, value: string | NestedRecord) => void,
 ): void {
   for (const [key, value] of Object.entries(obj)) {
-    if (typeof value === "object" && value !== null && !Array.isArray(value)) {
+    if (typeof value === "object" && value !== null) {
       recursive_iterator(value, callback);
     } else {
       callback(key, value);
@@ -15,35 +16,71 @@ export function recursive_iterator(
 
 export type NestedRecord = { [k: string]: string | NestedRecord };
 
-export interface StrongRecord<T> {
-  [key: string]: T | StrongRecord<T>;
-}
+export type StrongObject<T> = { [key: string]: StrongValue<T> };
+export type StrongArray<T> = Array<StrongValue<T>>;
+export type StrongValue<T> = T | StrongObject<T> | StrongArray<T>;
+
 export type Editor<T> = (key: string, value: T) => T;
 
-export function is_strong_record<T>(
-  value: T | StrongRecord<T>,
-): value is StrongRecord<T> {
+export function is_strong_object<T>(
+  value: StrongValue<T>,
+): value is StrongObject<T> {
   return typeof value === "object" && value !== null && !Array.isArray(value);
 }
 
 export function strong_edit<T>(
-  record: StrongRecord<T>,
+  data: StrongValue<T>,
   editor: Editor<T>,
-): StrongRecord<T> {
-  return Object.fromEntries(
-    Object.entries(record).map(([key, value]) => {
-      if (is_strong_record(value)) {
-        return [key, strong_edit(value, editor)];
+): StrongValue<T> {
+  if (Array.isArray(data)) {
+    return data.map((value, index) => {
+      if (is_strong_object(value) || Array.isArray(value)) {
+        return strong_edit(value, editor);
       } else {
-        return [key, editor(key, value as T)];
+        return editor(index.toString(), value as T);
       }
-    }),
-  );
+    });
+  }
+
+  if (is_strong_object(data)) {
+    return Object.fromEntries(
+      Object.entries(data).map(([key, value]) => {
+        if (is_strong_object(value) || Array.isArray(value)) {
+          return [key, strong_edit(value, editor)];
+        } else {
+          return [key, editor(key, value as T)];
+        }
+      }),
+    );
+  }
+
+  return data;
+}
+
+type ThemeFontStyle = {
+  "@_points": string
+  "@_character_weight": string
+  "@_shadow": string
+  "@_shadow_offset_x": string
+  "@_shadow_offset_y": string
+  "@_shadow_alpha": string
+  "@_shadow_value": string
 }
 
 export type BpyTheme = {
   bpy: {
     Theme: NestedRecord;
+    ThemeStyle: {
+      panel_title: {
+        ThemeFontStyle: ThemeFontStyle
+      }
+      widget: {
+        ThemeFontStyle: ThemeFontStyle
+      }
+      tooltip: {
+        ThemeFontStyle: ThemeFontStyle
+      }
+    };
   };
 };
 
@@ -57,6 +94,4 @@ export const xml_parser_config: X2jOptions = {
   ignoreAttributes: false
 };
 
-export function isHex(string: string): boolean {
-  return string.match(/^#(?:[A-Fa-f0-9]{8}|[A-Fa-f0-9]{4})$/) !== null;
-}
+export const isHex = (hex: string) => parseHex(hex) !== undefined

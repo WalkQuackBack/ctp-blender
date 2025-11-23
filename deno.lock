@@ -4,6 +4,8 @@
     "jsr:@std/assert@1": "1.0.16",
     "jsr:@std/cli@^1.0.24": "1.0.24",
     "jsr:@std/internal@^1.0.12": "1.0.12",
+    "npm:@types/culori@^4.0.1": "4.0.1",
+    "npm:culori@^4.0.1": "4.0.2",
     "npm:fast-xml-parser@^5.3.2": "5.3.2"
   },
   "jsr": {
@@ -24,6 +26,12 @@
     }
   },
   "npm": {
+    "@types/culori@4.0.1": {
+      "integrity": "sha512-43M51r/22CjhbOXyGT361GZ9vncSVQ39u62x5eJdBQFviI8zWp2X5jzqg7k4M6PVgDQAClpy2bUe2dtwEgEDVQ=="
+    },
+    "culori@4.0.2": {
+      "integrity": "sha512-1+BhOB8ahCn4O0cep0Sh2l9KCOfOdY+BXJnKMHFFzDEouSr/el18QwXEMRlOj9UY5nCeA8UN3a/82rUWRBeyBw=="
+    },
     "fast-xml-parser@5.3.2": {
       "integrity": "sha512-n8v8b6p4Z1sMgqRmqLJm3awW4NX7NkaKPfb3uJIBTSH7Pdvufi3PQ3/lJLQrvxcMYl7JI2jnDO90siPEpD8JBA==",
       "dependencies": [
@@ -43,6 +51,8 @@
     "dependencies": [
       "jsr:@std/assert@1",
       "jsr:@std/cli@^1.0.24",
+      "npm:@types/culori@^4.0.1",
+      "npm:culori@^4.0.1",
       "npm:fast-xml-parser@^5.3.2"
     ]
   }

@@ -1,10 +1,13 @@
 {
   "tasks": {
-    "build-tera": "deno run -R -W ./scripts/build_tera.ts"
+    "build-tera": "deno run -R -W ./scripts/build_tera.ts",
+    "gen-color-index": "deno run -R -W ./scripts/generate_color_index.ts"
   },
   "imports": {
     "@std/assert": "jsr:@std/assert@1",
     "@std/cli": "jsr:@std/cli@^1.0.24",
+    "@types/culori": "npm:@types/culori@^4.0.1",
+    "culori": "npm:culori@^4.0.1",
     "fast-xml-parser": "npm:fast-xml-parser@^5.3.2"
   }
 }
