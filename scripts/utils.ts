@@ -71,13 +71,7 @@ export type BpyTheme = {
   bpy: {
     Theme: NestedRecord;
     ThemeStyle: {
-      panel_title: {
-        ThemeFontStyle: ThemeFontStyle
-      }
-      widget: {
-        ThemeFontStyle: ThemeFontStyle
-      }
-      tooltip: {
+      [key: string]: {
         ThemeFontStyle: ThemeFontStyle
       }
     };

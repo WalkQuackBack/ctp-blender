@@ -20,9 +20,9 @@ function transform_xml_to_whiskers(xml: BpyTheme, version: string): string {
   const hex_replaced_jso = strong_edit(xml.bpy.Theme, hexReplace);
 
   const themeStyle = xml.bpy.ThemeStyle
-  themeStyle.panel_title.ThemeFontStyle["@_shadow"] = "{{panel_title_shadow}}"
-  themeStyle.widget.ThemeFontStyle["@_shadow"] = "{{widget_shadow}}"
-  themeStyle.tooltip.ThemeFontStyle["@_shadow"] = "{{tooltip_shadow}}"
+  for (const [key, value] of Object.entries(themeStyle)) {
+    value.ThemeFontStyle["@_shadow"] = `{{${key}_shadow}}`
+  }
 
   const builder = new XMLBuilder(xml_builder_config);
   const xml_content = builder.build({
@@ -48,6 +48,9 @@ whiskers:
 {%- set panel_title_shadow = if(cond=flavor.dark, t=3, f=0) -%}
 {%- set widget_shadow = if(cond=flavor.dark, t=1, f=0) -%}
 {%- set tooltip_shadow = if(cond=flavor.dark, t=1, f=0) -%}
+
+{#- Used by 3.5.x -#}
+{%- set widget_label_shadow = if(cond=flavor.dark, t=3, f=0) -%}
 
 {%- set active_object = peach -%}
 {%- set object_select = maroon -%}
@@ -89,3 +92,4 @@ async function build_for_version(version: string): Promise<void> {
 
 build_for_version("4.5LTS");
 build_for_version("5.0.0");
+build_for_version("3.5.1");
