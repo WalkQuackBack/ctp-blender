@@ -93,3 +93,4 @@ async function build_for_version(version: string): Promise<void> {
 build_for_version("4.5LTS");
 build_for_version("5.0.0");
 build_for_version("3.5.1");
+build_for_version("2.83LTS");
