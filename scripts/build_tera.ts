@@ -20,9 +20,9 @@ function transform_xml_to_whiskers(xml: BpyTheme, version: string): string {
   const hex_replaced_jso = strong_edit(xml.bpy.Theme, hexReplace);
 
   const themeStyle = xml.bpy.ThemeStyle
-  themeStyle.panel_title.ThemeFontStyle["@_shadow"] = "{{panel_title_shadow}}"
-  themeStyle.widget.ThemeFontStyle["@_shadow"] = "{{widget_shadow}}"
-  themeStyle.tooltip.ThemeFontStyle["@_shadow"] = "{{tooltip_shadow}}"
+  for (const [key, value] of Object.entries(themeStyle)) {
+    value.ThemeFontStyle["@_shadow"] = `{{${key}_shadow}}`
+  }
 
   const builder = new XMLBuilder(xml_builder_config);
   const xml_content = builder.build({
