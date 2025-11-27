@@ -36,7 +36,7 @@
 
 ## Usage
 
-1. Locate the folder that designates to your Blender version, such as `themes-4.5LTS`.
+1. Under `themes/`, locate the folder that designates to your Blender version, such as `4.5LTS`.
 1. Choose a flavor and accent, and download the XML file.
 1. Under the [Themes section](https://docs.blender.org/manual/en/dev/editors/preferences/themes.html),
 	install the XML file that was downloaded.
