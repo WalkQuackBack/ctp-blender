@@ -15,6 +15,9 @@ whiskers:
 {%- set widget_shadow = if(cond=flavor.dark, t=1, f=0) -%}
 {%- set tooltip_shadow = if(cond=flavor.dark, t=1, f=0) -%}
 
+{#- Used by 3.5.x -#}
+{%- set widget_label_shadow = if(cond=flavor.dark, t=3, f=0) -%}
+
 {%- set active_object = peach -%}
 {%- set object_select = maroon -%}
 

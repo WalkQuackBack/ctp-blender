@@ -49,6 +49,9 @@ whiskers:
 {%- set widget_shadow = if(cond=flavor.dark, t=1, f=0) -%}
 {%- set tooltip_shadow = if(cond=flavor.dark, t=1, f=0) -%}
 
+{#- Used by 3.5.x -#}
+{%- set widget_label_shadow = if(cond=flavor.dark, t=3, f=0) -%}
+
 {%- set active_object = peach -%}
 {%- set object_select = maroon -%}
 
@@ -89,3 +92,4 @@ async function build_for_version(version: string): Promise<void> {
 
 build_for_version("4.5LTS");
 build_for_version("5.0.0");
+build_for_version("3.5.1");
