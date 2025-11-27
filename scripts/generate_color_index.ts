@@ -13,7 +13,7 @@ import { colorIndex as existingColorIndexObj } from "./color_index.ts";
 const args = parseArgs(Deno.args, {
   string: ["versions"],
   default: {
-    versions: "5.0.0,4.5LTS,3.5.1",
+    versions: "5.0.0,4.5LTS,3.5.1,2.83LTS",
   },
 });
 const versions = args.versions.split(",");
