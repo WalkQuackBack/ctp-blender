@@ -39,7 +39,7 @@ whiskers:
   matrix:
     - flavor
     - accent
-  filename: "themes-${version}/{{flavor.identifier}}/Catppuccin {{ flavor.identifier | capitalize }} {{ accent | capitalize }}.xml"
+  filename: "themes/${version}/{{flavor.identifier}}/Catppuccin {{ flavor.identifier | capitalize }} {{ accent | capitalize }}.xml"
   hex_format: "#{{R}}{{G}}{{B}}{{A}}"
 ---
   

@@ -5,7 +5,7 @@ whiskers:
   matrix:
     - flavor
     - accent
-  filename: "themes-5.0.0/{{flavor.identifier}}/Catppuccin {{ flavor.identifier | capitalize }} {{ accent | capitalize }}.xml"
+  filename: "themes/5.0.0/{{flavor.identifier}}/Catppuccin {{ flavor.identifier | capitalize }} {{ accent | capitalize }}.xml"
   hex_format: "#{{R}}{{G}}{{B}}{{A}}"
 ---
   
